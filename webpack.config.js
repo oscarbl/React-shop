@@ -30,12 +30,12 @@ module.exports =  {
                 ]
             },
             {
-                test: /\.s[ac]ss$/i,
-                use:[
-                        "style-loader",
-                        "css-loader",
-                        "sass-loader",
-                        ],
+            test: /\.(css|scss)$/,
+            use:[
+                    "style-loader",
+                    "css-loader",
+                    "sass-loader",
+                    ],
             }
         ]
     },
@@ -44,5 +44,16 @@ module.exports =  {
             template: "./public/index.html",
             filename: "./index.html"
         }),
-    ]
+        new MiniCssExtractPlugin({
+            filename: '[name].css'
+        }),
+    ],
+    devServer: {
+        // contentBase se cambia por static:{directory: }
+        static:{
+            directory: path.join(__dirname, 'dist'),
+        },
+        compress: true,
+        port: 3005,
+    }
 }
